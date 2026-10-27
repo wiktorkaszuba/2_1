@@ -19,12 +19,21 @@
       .then(response => response.json())
       .then(array => {
         answer.innerHTML = "<ul>";
+
         array.forEach((el) => {
-          answer.innerHTML += "<li>" + el.title + "<ul><li>" + el.body + "</li></ul></li>";
+          answer.innerHTML += `
+            <li>
+              ${el.title}
+              <ul>
+                <li>${el.body}</li>
+              </ul>
+            </li>
+          `;
         });
-        answer.innerHTML += "</ul>"
-      })
-  })
+
+        answer.innerHTML += "</ul>";
+      });
+  });
 
   cw2.addEventListener("click", function() {
     //TODO
