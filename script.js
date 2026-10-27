@@ -20,8 +20,7 @@
       .then(array => {
         answer.innerHTML = "<ul>";
         array.forEach((el) => {
-          const post = JSON.parse(el);
-          answer.innerHTML += "<li>" + post + "</li>";
+          answer.innerHTML += "<li>" + el.title + "<ul><li>" + el.body + "</li></ul></li>";
         });
         answer.innerHTML += "</ul>"
       })
