@@ -54,14 +54,14 @@
     console.log(sel);
     fetch('https://jsonplaceholder.typicode.com/posts/' + sel)
       .then(response => response.json())
-      .then(array => {
+      .then(json => {
         let html = "<ul>";
 
         html += `
           <li>
-            ${array.title}
+            ${json.title}
             <ul>
-              <li>${array.body}</li>
+              <li>${json.body}</li>
             </ul>
           </li>
         `;
@@ -73,7 +73,22 @@
   })
 
   cw3.addEventListener("click", function() {
-    //TODO
+    answer.innerHTML = "Processing...";
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: 'test',
+        body: 'testtest123',
+        userId: 1,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then(response => response.json())
+      .then(json => {
+        answer.innerHTML = `Dodano nowy post o ID = ${json.id}`;
+      })
   })
 
 })();
