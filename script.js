@@ -5,6 +5,16 @@
   const cw3 = document.getElementById('cw3')
   const answer = document.getElementById('answer')
 
+  const formDiv = document.getElementById("form")
+  let formHtml = `
+    <label for="wybor">Wybierz post:</label>
+    <select id="wybor">`;
+  for (let i = 1; i <= 10; i++) {
+    formHtml += `<option value='${i}'>${i}</option>`;
+  }
+  formHtml += `</select>`;
+  formDiv.innerHTML = formHtml;
+
   example.addEventListener("click", function() {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
@@ -19,10 +29,10 @@
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
       .then(array => {
-        answer.innerHTML = "<ul>";
+        let html = "<ul>";
 
         array.forEach((el) => {
-          answer.innerHTML += `
+          html += `
             <li>
               ${el.title}
               <ul>
@@ -32,12 +42,34 @@
           `;
         });
 
-        answer.innerHTML += "</ul>";
+        html += "</ul>";
+
+        answer.innerHTML = html;
       });
   });
 
   cw2.addEventListener("click", function() {
-    //TODO
+    let sel = document.querySelector("#wybor").value;
+    answer.innerHTML = "Loading...";
+    console.log(sel);
+    fetch('https://jsonplaceholder.typicode.com/posts/' + sel)
+      .then(response => response.json())
+      .then(array => {
+        let html = "<ul>";
+
+        html += `
+          <li>
+            ${array.title}
+            <ul>
+              <li>${array.body}</li>
+            </ul>
+          </li>
+        `;
+
+        html += "</ul>";
+
+        answer.innerHTML = html;
+      });
   })
 
   cw3.addEventListener("click", function() {
